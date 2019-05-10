@@ -14,7 +14,7 @@ class Comment(models.Model):
         (STATUS_DELETE,'删除'),
     )
 
-    content = models.CharField(max_length=1000,verbose_name='评论内容')
+    content = models.TextField(verbose_name='评论内容')
     create_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     status =models.PositiveIntegerField(choices=STATUS_ITEMS,default=STATUS_NORMAL,verbose_name='状态')
     target = models.ForeignKey(Car,verbose_name='评论目标',on_delete=models.CASCADE)

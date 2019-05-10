@@ -17,6 +17,10 @@ class Car(models.Model):
     notice =models.TextField(verbose_name='公告')
     car_type=models.PositiveIntegerField(choices=CAR_ITEMS,default=1,verbose_name='用车类型')
 
+    class Meta:
+        verbose_name_plural = verbose_name = '校车'
+    def __str__(self):
+        return self.car_num
 
 
 class Autoshift(models.Model):
@@ -27,11 +31,13 @@ class Autoshift(models.Model):
         (4, '兰溪-金华'),
     )
 
+
+
     times = models.DateTimeField(verbose_name='班车时间')  # 待考虑
     duration = models.CharField(verbose_name='时长', max_length=40)
     path = models.PositiveIntegerField(verbose_name='路线', choices=PATH_ITEMS, default=1)
     car =models.ManyToManyField(Car)
-    user = models.ManyToManyField(User,through='CarAndShift')
+    user = models.ManyToManyField(User,through='CarAndShift')#后台有问题
 
     class Meta:
         verbose_name_plural = verbose_name = '汽车班次'
@@ -43,5 +49,8 @@ class CarAndShift(models.Model):
     shift=models.ForeignKey(Autoshift,on_delete=models.CASCADE)
     created_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     due_num =models.IntegerField(verbose_name='预约人数')
+
+    class Meta:
+        verbose_name_plural=verbose_name='用户约车'
 
 
