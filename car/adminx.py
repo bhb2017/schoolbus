@@ -1,6 +1,6 @@
 import xadmin
 from xadmin.layout import Main,Row,Fieldset
-from .models import Car,CarAndShift,Autoshift
+from .models import Car,CarAndShift,Autoshift,PathType
 
 class CarAdmin(object):
     list_display=['car_num','driver','driver_phone','set_num','price','notice','car_type']
@@ -39,6 +39,13 @@ class CarAndShiftAdmin(object):
     list_filter=['user','shift','created_time']
 
 
+class PathTypeAdmin(object):
+    list_display=['path_name']
+    search_fields=['path_name']
+    list_filter=['path_name']
+
+
 xadmin.site.register(Car,CarAdmin)
 xadmin.site.register(Autoshift,AutoshiftAdmin)
 xadmin.site.register(CarAndShift,CarAndShiftAdmin)
+xadmin.site.register(PathType,PathTypeAdmin)

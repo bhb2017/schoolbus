@@ -8,6 +8,10 @@ class Car(models.Model):
         (1,'普通校车'),
         (2,'教师用车'),
     )
+    STATE_ITEMS=(
+        (1,'正常发车'),
+        (2,'人数太少不发车'),
+    )
 
     car_num=models.CharField(verbose_name='车牌号',max_length=20)
     driver =models.CharField(verbose_name='驾驶员',max_length=10)
@@ -16,26 +20,27 @@ class Car(models.Model):
     price =models.FloatField(verbose_name='价格',max_length=10)
     notice =models.TextField(verbose_name='公告')
     car_type=models.PositiveIntegerField(choices=CAR_ITEMS,default=1,verbose_name='用车类型')
+    car_state=models.PositiveIntegerField(choices=STATE_ITEMS,default=1,verbose_name='用车状态')#默认正常
 
     class Meta:
         verbose_name_plural = verbose_name = '校车'
     def __str__(self):
         return self.car_num
 
+class PathType(models.Model):
+    path_name=models.CharField(verbose_name='路径名',max_length=20)
+
+    class Meta:
+        verbose_name_plural=verbose_name='路线'
+    def __str__(self):
+        return self.path_name
 
 class Autoshift(models.Model):
-    PATH_ITEMS = (
-        (1, '兰溪校区-校本部'),
-        (2, '校本部-兰溪校区'),
-        (3, '兰溪-金华-校本部'),
-        (4, '兰溪-金华'),
-    )
-
 
 
     times = models.DateTimeField(verbose_name='班车时间')  # 待考虑
     duration = models.CharField(verbose_name='时长', max_length=40)
-    path = models.PositiveIntegerField(verbose_name='路线', choices=PATH_ITEMS, default=1)
+    path = models.ForeignKey(PathType,on_delete=models.CASCADE)
     car =models.ManyToManyField(Car)
     user = models.ManyToManyField(User,through='CarAndShift')#后台有问题
 
