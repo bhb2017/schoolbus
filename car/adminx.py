@@ -3,7 +3,7 @@ from xadmin.layout import Main,Row,Fieldset
 from .models import Car,CarAndShift,Autoshift,PathType
 
 class CarAdmin(object):
-    list_display=['car_num','driver','driver_phone','set_num','price','notice','car_type']
+    list_display=['car_num','driver','driver_phone','set_num','price','notice','car_type','car_state']
     search_fields=['car_num','car_type']
     list_filter=['car_type']
 
@@ -15,7 +15,7 @@ class CarAdmin(object):
             ),
             Fieldset(
                 '汽车相关信息',
-                'car_num','set_num','price','car_type'
+                'car_num','set_num','price','car_type','car_state'
             ),
             Fieldset(
                 '其他信息',

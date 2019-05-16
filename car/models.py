@@ -22,6 +22,8 @@ class Car(models.Model):
     car_type=models.PositiveIntegerField(choices=CAR_ITEMS,default=1,verbose_name='用车类型')
     car_state=models.PositiveIntegerField(choices=STATE_ITEMS,default=1,verbose_name='用车状态')#默认正常
 
+
+
     class Meta:
         verbose_name_plural = verbose_name = '校车'
     def __str__(self):
