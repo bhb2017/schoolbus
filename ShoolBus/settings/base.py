@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'car',
     'xadmin',
     'crispy_forms',
+    'car.templatetags',
 ]
 
 MIDDLEWARE = [

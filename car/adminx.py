@@ -3,6 +3,10 @@ from xadmin.layout import Main,Row,Fieldset
 from .models import Car,CarAndShift,Autoshift,PathType
 
 class CarAdmin(object):
+
+    # def show_cars(self,obj):
+    #     return [a.car_num for a in obj.shift.all()]
+
     list_display=['car_num','driver','driver_phone','set_num','price','notice','car_type','car_state']
     search_fields=['car_num','car_type']
     list_filter=['car_type']
